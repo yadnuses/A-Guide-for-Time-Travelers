@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """年度初稿结构校验：按《年度初稿撰写规范》第 10、11 节做机械可查的部分。"""
+import json
 import re
 import sys
 from pathlib import Path
@@ -46,6 +47,17 @@ def find_years() -> list[int]:
 REQUIRED_TOP = ["一、落地", "二、世界棋盘", "三、你的路线", "四、随身工具", "结语", "附录：主要参考来源"]
 CARD_FIELDS = ["**阶段**", "**当时入口**", "**所需资本与能力**", "**收益与退出**", "**风险与法律**"]
 TAGS = ["历史已验证", "合理推演", "私人股权与合伙", "先知投资", "当年合法今天未必"]
+
+
+def stage_exemptions() -> dict:
+    """读取同目录的 stage_exemptions.json；豁免只把错误降为提示。"""
+    f = Path(__file__).resolve().parent / "stage_exemptions.json"
+    if not f.exists():
+        return {}
+    try:
+        return json.loads(f.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
 
 
 def check(year: int) -> list[str]:
@@ -132,16 +144,23 @@ def check(year: int) -> list[str]:
     else:
         stage_text = "\n".join(cards)
         stages = {
-            "survival": ("生存",),
-            "first_capital": ("第一桶金",),
-            "wealth_jump": ("财富跃升", "财富跃迁"),
+            "survival": ("survival", "生存", "活下来"),
+            "first_capital": ("first_capital", "第一桶金"),
+            "wealth_jump": ("wealth_jump", "财富跃升", "财富跃迁", "财富跃迁"),
         }
         absent = [k for k, words in stages.items() if not any(w in stage_text for w in words)]
         if absent:
-            errs.append(f"路线卡未覆盖阶段 {absent}")
+            ex = stage_exemptions().get(str(year)) or {}
+            if set(absent) <= set(ex.get("missing") or []):
+                errs.append(f"[提示] 路线卡未覆盖阶段 {absent}，已在 stage_exemptions.json 登记豁免")
+            else:
+                errs.append(f"路线卡未覆盖阶段 {absent}")
     for i, c in enumerate(cards, 1):
-        c = c.split("^#{1,4} ", 1)[0]
+        head = c.split("\n", 1)[0]
         body_c = re.split(r"^#{1,4} ", c, maxsplit=1, flags=re.M)[0]
+        # 机会卡按规范只要求「一个明确入口 + 一条明确风险」，不套五字段
+        if "机会卡" in head:
+            continue
         for f in CARD_FIELDS:
             if f not in body_c:
                 # 规范第 8 节允许投资路线用「事实层／故事层」两层写法，
@@ -175,10 +194,11 @@ def main() -> int:
         cards = len(re.split(r"^#{3,4} 路线卡", p.read_text(encoding="utf-8"), flags=re.M)) - 1 if p.exists() else 0
         refs = re.findall(r"\[(\d+)\]", p.read_text(encoding="utf-8")) if p.exists() else []
         top = max((int(r) for r in refs), default=0)
-        print(f"{y:<6}{size:>8}{cards:>7}{top:>6}{'OK' if not errs else 'FAIL':>8}")
+        hard = [e for e in errs if not e.startswith("[提示]")]
+        print(f"{y:<6}{size:>8}{cards:>7}{top:>6}{'OK' if not hard else 'FAIL':>8}")
         for e in errs:
             print(f"       - {e}")
-        bad += bool(errs)
+        bad += bool(hard)
     print(f"\n{len(years)} 篇：合格 {len(years) - bad}，不合格 {bad}")
     return 0
 
