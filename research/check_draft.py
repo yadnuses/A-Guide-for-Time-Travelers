@@ -7,19 +7,27 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 
+def decade_dir(year: int) -> Path:
+    """十年分组的目录名，例如 1905 → 1900-1909。"""
+    start = year - year % 10
+    return ROOT / f"{start}-{start + 9}"
+
+
 def draft_path(year: int) -> Path:
-    """兼容两种布局：
-    仓库版  ROOT/<年份>/<年份>.md
-    工作区版 ROOT/03_年度初稿/<年份>.md
+    """兼容三种布局：
+    仓库版    ROOT/<十年>/<年份>.md   例如 1900-1909/1905.md
+    旧仓库版  ROOT/<年份>/<年份>.md
+    工作区版  ROOT/03_年度初稿/<年份>.md
     """
-    for base in (ROOT / "03_年度初稿", ROOT / str(year)):
+    for base in (ROOT / "03_年度初稿", decade_dir(year), ROOT / str(year)):
         p = base / f"{year}.md"
         if p.exists():
             return p
-    return ROOT / "03_年度初稿" / f"{year}.md"
+    return decade_dir(year) / f"{year}.md"
 
 
 def find_years() -> list[int]:
+    """扫描仓库根目录、十年目录、年份目录与工作区的 03_年度初稿/。"""
     years: set[int] = set()
     for base in (ROOT / "03_年度初稿", ROOT):
         if not base.is_dir():
@@ -28,8 +36,11 @@ def find_years() -> list[int]:
             if p.stem.isdigit():
                 years.add(int(p.stem))
         for d in base.iterdir():
-            if d.is_dir() and d.name.isdigit() and (d / f"{d.name}.md").exists():
-                years.add(int(d.name))
+            if not d.is_dir():
+                continue
+            for p in d.glob("*.md"):
+                if p.stem.isdigit():
+                    years.add(int(p.stem))
     return sorted(years)
 
 REQUIRED_TOP = ["一、落地", "二、世界棋盘", "三、你的路线", "四、随身工具", "结语", "附录：主要参考来源"]
