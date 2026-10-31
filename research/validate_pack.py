@@ -2,9 +2,11 @@
 """资料包校验：按《数据格式与搜集规范》第 7 节完成验收做机器可判定部分。
 
 用法：
-    python3 02_资料与考据/validate_pack.py 1911 QING
-    python3 02_资料与考据/validate_pack.py 1911          # 校验该年全部地区包
-    python3 02_资料与考据/validate_pack.py               # 校验全库
+    python3 research/validate_pack.py 1911 QING
+    python3 research/validate_pack.py 1911          # 校验该年全部地区包
+    python3 research/validate_pack.py               # 校验全库
+
+（工作区里该目录名为 02_资料与考据/，脚本自动识别，无需改参数。）
 """
 import json
 import re
@@ -12,9 +14,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-# 兼容两种布局：仓库版「资料与考据/」，工作区版「02_资料与考据/」
-RESEARCH = next((d for d in (ROOT / '资料与考据', ROOT / '02_资料与考据') if d.is_dir()),
-                ROOT / '资料与考据')
+# 兼容三种布局：仓库版 research/，工作区版 02_资料与考据/，旧版 资料与考据/
+RESEARCH = next((d for d in (ROOT / 'research', ROOT / '资料与考据', ROOT / '02_资料与考据')
+                 if d.is_dir()), ROOT / 'research')
 
 CATEGORIES = {'events', 'survival_cost', 'law_identity', 'finance', 'technology_industry',
               'safety_medical', 'business_career', 'sports_culture', 'language'}

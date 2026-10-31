@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """列出引用了维基镜像站/代理站的记录，供后续替换来源。
 
-背景：本环境沙箱阻断 curl 直连，WebFetch 对 wikipedia.org 域名失败，
-资料搜集时只能用 WebSearch 摘要加镜像站（wikiwand、wiki2、us-wikipedia 等）。
-镜像站内容对应真实条目，但来源等级低于原始条目或一手档案，需登记待替换。
+背景：部分记录在搜集时只能取到维基镜像站（wikiwand、wiki2、us-wikipedia 等）
+而非维基原始条目或一手档案。镜像站内容通常对应真实条目，但来源等级低于
+原始条目，需登记待替换为一手档案或官方统计。
 
 用法：
-    python3 02_资料与考据/list_mirror_sources.py            # 列出全部
-    python3 02_资料与考据/list_mirror_sources.py 1911        # 只看某年
+    python3 research/list_mirror_sources.py            # 列出全部
+    python3 research/list_mirror_sources.py 1911        # 只看某年
 """
 import json
 import re

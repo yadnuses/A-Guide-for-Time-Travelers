@@ -2,7 +2,7 @@
 """按年份汇总资料包规模，用于批次验收。
 
 用法：
-    python3 02_资料与考据/summarize_year.py 1911 1920
+    python3 research/summarize_year.py 1911 1920
 """
 import json
 import sys
