@@ -1,4 +1,18 @@
-[English](README.en.md) ｜ **中文**
+<p align="center">
+  <img src="https://img.shields.io/badge/%E4%B8%AD%E6%96%87-%E5%BD%93%E5%89%8D-c0392b?style=for-the-badge" alt="中文">
+  <a href="README.en.md"><img src="https://img.shields.io/badge/English-Switch-95a5a6?style=for-the-badge" alt="Switch to English"></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/%E8%A6%86%E7%9B%96-1900%E2%80%931930-2c3e50?style=flat-square" alt="1900–1930">
+  <img src="https://img.shields.io/badge/%E6%88%90%E7%A8%BF-31%20%E7%AF%87-27ae60?style=flat-square" alt="31 guides">
+  <img src="https://img.shields.io/badge/%E8%B5%84%E6%96%99-172%20%E5%8C%85%20%C2%B7%201%2C791%20%E6%9D%A1%E4%BA%8B%E5%AE%9E%20%C2%B7%20521%20%E6%9D%A1%E6%9C%BA%E4%BC%9A-2980b9?style=flat-square" alt="172 packs">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/%E6%AD%A3%E6%96%87%E4%B8%8E%E8%B5%84%E6%96%99-CC%20BY--NC--SA%204.0-8e44ad?style=flat-square" alt="CC BY-NC-SA 4.0">
+  <img src="https://img.shields.io/badge/%E8%84%9A%E6%9C%AC-MIT-e67e22?style=flat-square" alt="MIT">
+</p>
 
 # 给穿越者的指南
 
@@ -6,7 +20,7 @@
 
 本指南中的引用与史实完全采用真实史料撰写，所以本文亦可作为研究对应年份历史的趣味科普书。
 
-## 穿越者们，在打开指南之前，请认真阅读以下注意事项：
+## ⚠️ 穿越者们，在打开指南之前，请认真阅读以下注意事项：
 
 ```
 1.每一个年份的指南都在阿拉伯数字命名的对应文件夹内，请根据实际情况找到对应的指南文件
@@ -16,7 +30,7 @@
 5.请认真阅读“避坑清单”章节，不遵守里面的内容可能会让你丧命
 ```
 
-## 目录
+## 📖 目录
 
 ```
 1900-1909/          1900—1909 年的年度初稿（如 1900-1909/1905.md）
@@ -33,9 +47,11 @@ LICENSE-CODE        脚本的许可
 
 ## 如果你是穿越者，你看到这里就够了，祝你旅途顺利！
 
+---
+
 ## 以下是数据规范及合作方式，欢迎你加入我们！
 
-## 覆盖范围（实时更新）
+## 📊 覆盖范围（实时更新）
 
 ```
 成稿：1900—1930 年，共 31 篇，均已审校
@@ -44,7 +60,7 @@ LICENSE-CODE        脚本的许可
 我们期望你的加入和共建，我们一起建立一个覆盖人类存在周期的《穿越者指南》，同时不断完善每一份指南覆盖的范围和内容，请阅读「合作共建」章节了解共建方式
 ```
 
-## 合作共建
+## 🤝 合作共建
 
 我们欢迎两种贡献：**补充资料**和**写新的年份**。不管做哪一种，都请先阅读对应的规范。
 
@@ -94,7 +110,7 @@ python3 research/check_draft.py 1911
 
 详细的提交步骤、审核标准、常见退回原因，见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 
-## 数据拼接方式
+## 🧩 数据拼接方式
 
 每个「年份 / 地区」是一个资料包，三个文件：
 
@@ -107,7 +123,7 @@ research/1910/US/
 
 事实记录的核验状态分三档：`cross_checked`（多源交叉）、`single_source`（单一来源）、`conflicted`（来源互相矛盾，两种口径并列保留，不强行统一）。矛盾不消除，是这套资料的设计原则之一——读者能看见证据本身的分歧。
 
-## 怎么校验
+## ✅ 怎么校验
 
 仓库自带脚本，均可从任意目录运行。**每次 PR 会自动跑前两条**，你也可以在本地先跑一遍再提交：
 
@@ -125,7 +141,7 @@ python3 research/summarize_year.py 1900 1910
 python3 research/list_mirror_sources.py
 ```
 
-## 这套东西的前提
+## 📐 这套东西的前提
 
 以下是写作时自我约束的规则，也是阅读时该带着的怀疑：
 
@@ -134,14 +150,14 @@ python3 research/list_mirror_sources.py
 - **不美化暴力与不义。** 殖民暴力、种族屠杀、政治清洗、法西斯上台，按史实与数字记录，不猎奇、不煽情、不替代读者判断。
 - **缺口如实标注。** 资料包里没有的数据，成稿里就写"未取得"，不用常识填补。
 
-## 已知局限
+## 📌 已知局限
 
 - **年份覆盖不均。** 1900—1930 已成稿；1931—2025 只有地域规划。
 - **来源等级待提。** 早期资料搜集时部分条目只能取到维基镜像站，现已基本归一到维基原站，但仍有少数条目依赖 AI 聚合站与复习站，正逐条换源。
 - **1926 年缺财富跃升阶段。** 该年资料包没有 wealth_jump 机会记录，成稿因此只有生存与第一桶金两类路线，已在 `research/stage_exemptions.json` 登记豁免，待补资料后解除。
 - **地区深度不均。** 每年一个主舞台承载完整故事线，次重点地区篇幅明显更短，机会卡只给一个入口和一条风险。
 
-## 许可
+## 📜 许可
 
 - 正文与资料（各年份文件夹与 `research/` 下的 `.md`、`.jsonl`）：**CC BY-NC-SA 4.0**，见 [LICENSE](LICENSE)。
 - 脚本（`*.py`）：**MIT**，见 [LICENSE-CODE](LICENSE-CODE)。
