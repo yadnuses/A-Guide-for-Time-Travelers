@@ -1,0 +1,56 @@
+name: Fact correction (English)
+description: Report an error in a fact record, a dead source, or a quote that does not match
+title: "[Correction] "
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for catching this. **Please give us something checkable** — otherwise we can only go on impressions, and the report tends to sit.
+  - type: input
+    id: fact-id
+    attributes:
+      label: Fact ID
+      description: In the form 1910-FR-COST-001. If you are unsure of the exact ID, the year, region and rough content will do.
+      placeholder: 1910-FR-COST-001
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type of problem
+      options:
+        - The quote cannot be found in the cited source
+        - The source link is dead
+        - A number or date is wrong
+        - The claim is inaccurate (overstated, understated, or a false causal link)
+        - Wrong category or field
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: What it says now
+      description: Paste the corresponding record from `research/`, or the sentence from the draft.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: correct
+    attributes:
+      label: What it should say, and on what authority
+      description: Give the source link and the excerpt. We cannot accept a correction without a source.
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: If this error affects a paragraph of a published guide, name the year and section.
+    validations:
+      required: false

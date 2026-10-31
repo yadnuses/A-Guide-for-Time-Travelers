@@ -1,0 +1,53 @@
+name: Claim a research pack (English)
+description: Announce a "year × region" research pack you intend to build, so nobody duplicates the work
+title: "[Claim] "
+labels: ["claim"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Claim before you start, so two people do not do the same work. Once you have claimed it, just reply in the issue with progress — you do not need to wait for approval.
+  - type: input
+    id: year
+    attributes:
+      label: Year
+      description: Four digits. Years that already have research are visible in the research/ directory.
+      placeholder: "1911"
+    validations:
+      required: true
+
+  - type: input
+    id: region
+    attributes:
+      label: Region code
+      description: Prefer ISO 3166-1 alpha-2 codes in capitals (FR, US, GB). For historical polities use a capitalised English name (OTTOMAN).
+      placeholder: CN
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: What you plan to cover
+      description: Which data categories you will collect, and your main sources (newspaper databases, statistical yearbooks, archives, academic monographs).
+    validations:
+      required: true
+
+  - type: dropdown
+    id: readiness
+    attributes:
+      label: Do you have the sources in hand?
+      options:
+        - Yes — clear sources, ready to write
+        - Partly — still filling in
+        - Only leads — need to scout first
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Where you need help
+      description: For example, a data category with no public source, a language barrier, or a name translation that needs a second pair of eyes.
+    validations:
+      required: false
