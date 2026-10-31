@@ -1,0 +1,53 @@
+name: 认领资料包
+description: 申报要新做一个「年份×地区」的资料包，避免与他人重复劳动
+title: "[认领] "
+labels: ["claim"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        开新包前请先认领，避免两个人做同一件事。认领后在 Issue 里回一句进度即可，不必等批准。
+  - type: input
+    id: year
+    attributes:
+      label: 年份
+      description: 四位年份。目前已有资料的年份可从 research/ 目录看到。
+      placeholder: "1911"
+    validations:
+      required: true
+
+  - type: input
+    id: region
+    attributes:
+      label: 地区代码
+      description: 优先用 ISO 3166-1 alpha-2 大写代码（FR、US、GB）；历史政权用大写英文名（OTTOMAN）。
+      placeholder: CN
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: 打算覆盖什么
+      description: 计划搜集哪几类数据、主要靠什么来源（报刊数据库、统计年鉴、档案、学术专著等）。
+    validations:
+      required: true
+
+  - type: dropdown
+    id: readiness
+    attributes:
+      label: 资料是否已经到手
+      options:
+        - 已有明确来源，可以直接开写
+        - 找到一部分，还在补
+        - 只有线索，需要先探路
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 需要协助的地方
+      description: 例如某类数据找不到公开来源、语言不通、需要有人复核译名。
+    validations:
+      required: false

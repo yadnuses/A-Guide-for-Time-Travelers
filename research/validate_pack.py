@@ -18,6 +18,9 @@ ROOT = Path(__file__).resolve().parent.parent
 RESEARCH = next((d for d in (ROOT / 'research', ROOT / '资料与考据', ROOT / '02_资料与考据')
                  if d.is_dir()), ROOT / 'research')
 
+# 镜像站名单与判定逻辑复用 list_mirror_sources.py，避免两处维护不同步
+from list_mirror_sources import is_mirror
+
 CATEGORIES = {'events', 'survival_cost', 'law_identity', 'finance', 'technology_industry',
               'safety_medical', 'business_career', 'sports_culture', 'language'}
 CORE = ['events', 'survival_cost', 'law_identity', 'finance', 'technology_industry']
@@ -61,6 +64,7 @@ def check_pack(year, region):
     summary = (d / 'summary.md').read_text(encoding='utf-8')
 
     fact_ids, seen = set(), set()
+    mirror_hits = []
     for f in facts:
         fid = f.get('id', '<无 id>')
         miss = [k for k in FACT_KEYS if k not in f]
@@ -90,8 +94,18 @@ def check_pack(year, region):
             miss = [k for k in ('title', 'url', 'quote', 'accessed_at') if not s.get(k)]
             if miss:
                 issues.append(f'{fid} source#{i} 缺 {miss}')
+            if is_mirror(s.get('url')):
+                mirror_hits.append(fid)
+        # 规范第 1.3 条要求关键事实「尽量」双源；标了交叉核验却只有一源，提示但不阻断
+        if f.get('verification') == 'cross_checked' and len(srcs) < 2:
+            issues.append(f'[提示] {fid} 标为 cross_checked 但只有 {len(srcs)} 个来源')
         if f.get('year') != year:
             issues.append(f'{fid} year 与目录不符')
+
+    if mirror_hits:
+        uniq = list(dict.fromkeys(mirror_hits))
+        issues.append(f'[提示] {len(uniq)} 条事实引用镜像站/代理站：'
+                      f'{", ".join(uniq[:4])}{" 等" if len(uniq) > 4 else ""}')
 
     for o in opps:
         oid = o.get('id', '<无 id>')

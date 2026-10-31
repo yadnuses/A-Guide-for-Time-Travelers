@@ -1,0 +1,56 @@
+name: 事实勘误
+description: 指出某条事实记录的错误、失效来源或对不上的引文
+title: "[勘误] "
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        谢谢帮我们抓错。**请尽量给出可核对的依据**，否则只能靠印象判断，容易被搁置。
+  - type: input
+    id: fact-id
+    attributes:
+      label: 事实 ID
+      description: 形如 1910-FR-COST-001。不确定具体 ID 的话，写出年份、地区和大致内容也可以。
+      placeholder: 1910-FR-COST-001
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 问题类型
+      options:
+        - 引文在生产来源里找不到
+        - 来源链接已失效
+        - 数字或日期有误
+        - 事实陈述不准确（夸大、缩小、因果错置）
+        - 类别或字段填错
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: 现在写的是什么
+      description: 粘贴 `research/` 里对应的那条记录，或成稿里的原句。
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: correct
+    attributes:
+      label: 正确的是什么，依据在哪里
+      description: 给出来源链接与原文摘录。没有出处的更正我们无法采纳。
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 补充说明
+      description: 如果这条错误影响到了成稿的某个段落，请指出年份与章节。
+    validations:
+      required: false

@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 我怎么参与共建
+    url: https://github.com/yadnuses/A-Guide-for-Time-Travelers/blob/main/CONTRIBUTING.md
+    about: 提 PR 前请先读这份，能省掉一轮退回
+  - name: 数据格式规范
+    url: https://github.com/yadnuses/A-Guide-for-Time-Travelers/blob/main/docs/data-spec.md
+    about: 字段、枚举、ID 命名与验收标准
+  - name: 年度初稿规范
+    url: https://github.com/yadnuses/A-Guide-for-Time-Travelers/blob/main/docs/draft-spec.md
+    about: 成稿的结构、路线卡、标签与引用规则

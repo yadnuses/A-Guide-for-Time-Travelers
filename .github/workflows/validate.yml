@@ -1,0 +1,29 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  data-and-drafts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 校验资料包
+        run: python3 research/validate_pack.py
+
+      - name: 校验年度初稿
+        run: python3 research/check_draft.py
+
+      - name: 统计镜像来源（仅提示，不阻断）
+        continue-on-error: true
+        run: python3 research/list_mirror_sources.py
