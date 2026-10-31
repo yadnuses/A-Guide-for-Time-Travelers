@@ -5,7 +5,32 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DRAFT = ROOT / "03_年度初稿"
+
+
+def draft_path(year: int) -> Path:
+    """兼容两种布局：
+    仓库版  ROOT/<年份>/<年份>.md
+    工作区版 ROOT/03_年度初稿/<年份>.md
+    """
+    for base in (ROOT / "03_年度初稿", ROOT / str(year)):
+        p = base / f"{year}.md"
+        if p.exists():
+            return p
+    return ROOT / "03_年度初稿" / f"{year}.md"
+
+
+def find_years() -> list[int]:
+    years: set[int] = set()
+    for base in (ROOT / "03_年度初稿", ROOT):
+        if not base.is_dir():
+            continue
+        for p in base.glob("*.md"):
+            if p.stem.isdigit():
+                years.add(int(p.stem))
+        for d in base.iterdir():
+            if d.is_dir() and d.name.isdigit() and (d / f"{d.name}.md").exists():
+                years.add(int(d.name))
+    return sorted(years)
 
 REQUIRED_TOP = ["一、落地", "二、世界棋盘", "三、你的路线", "四、随身工具", "结语", "附录：主要参考来源"]
 CARD_FIELDS = ["**阶段**", "**当时入口**", "**所需资本与能力**", "**收益与退出**", "**风险与法律**"]
@@ -13,7 +38,7 @@ TAGS = ["历史已验证", "合理推演", "私人股权与合伙", "先知投�
 
 
 def check(year: int) -> list[str]:
-    p = DRAFT / f"{year}.md"
+    p = draft_path(year)
     errs: list[str] = []
     if not p.exists():
         return ["文件缺失"]
@@ -128,12 +153,12 @@ def check(year: int) -> list[str]:
 
 def main() -> int:
     years = [int(a) for a in sys.argv[1:]] or sorted(
-        int(p.stem) for p in DRAFT.glob("*.md") if p.stem.isdigit()
+        find_years()
     )
     bad = 0
     print(f"{'年份':<6}{'字节':>8}{'路线卡':>7}{'引用':>6}{'状态':>8}")
     for y in years:
-        p = DRAFT / f"{y}.md"
+        p = draft_path(y)
         errs = check(y)
         size = len(p.read_text(encoding="utf-8").encode("utf-8")) if p.exists() else 0
         cards = len(re.split(r"^#{3,4} 路线卡", p.read_text(encoding="utf-8"), flags=re.M)) - 1 if p.exists() else 0

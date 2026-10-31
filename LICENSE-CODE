@@ -21,10 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 适用范围：本仓库内所有 .py 脚本，包括但不限于
-  02_资料与考据/validate_pack.py
-  02_资料与考据/check_draft.py
-  02_资料与考据/summarize_year.py
-  02_资料与考据/list_mirror_sources.py
-  04_审校与修订/check_drafts.py
-  04_审校与修订/check_cross_year.py
+  资料与考据/validate_pack.py
+  资料与考据/check_draft.py
+  资料与考据/summarize_year.py
+  资料与考据/list_mirror_sources.py
 文字与数据内容适用 CC BY-NC-SA 4.0，见 LICENSE。

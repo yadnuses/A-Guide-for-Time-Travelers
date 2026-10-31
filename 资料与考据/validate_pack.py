@@ -12,7 +12,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-RESEARCH = ROOT / '02_资料与考据'
+# 兼容两种布局：仓库版「资料与考据/」，工作区版「02_资料与考据/」
+RESEARCH = next((d for d in (ROOT / '资料与考据', ROOT / '02_资料与考据') if d.is_dir()),
+                ROOT / '资料与考据')
 
 CATEGORIES = {'events', 'survival_cost', 'law_identity', 'finance', 'technology_industry',
               'safety_medical', 'business_career', 'sports_culture', 'language'}

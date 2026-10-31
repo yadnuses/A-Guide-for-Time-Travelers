@@ -1,20 +1,8 @@
 # macOS
 .DS_Store
 
-# 临时工作区（PDF 抓取、中间导出、一次性脚本、归档的过程文件、工作日志）
-tmp/
-
-# 未审校初稿：审校通过后移入 03_年度初稿/，不随仓库发布
-07_未审校初稿/
-
 # Python
 *.pyc
 __pycache__/
 .venv/
 venv/
-
-# 宣传片素材：音乐为第三方版权音乐，二维码来源未核实，暂不入库
-06_视频宣传/assets/
-# HyperFrames 脚手架自带的工具说明，非项目内容
-06_视频宣传/hf_promo/CLAUDE.md
-06_视频宣传/hf_promo/AGENTS.md
