@@ -4,9 +4,9 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Coverage-1900%E2%80%931930-2c3e50?style=flat-square" alt="1900–1930">
-  <img src="https://img.shields.io/badge/Guides-31-27ae60?style=flat-square" alt="31 guides">
-  <img src="https://img.shields.io/badge/Research-172%20packs%20%C2%B7%201%2C791%20facts%20%C2%B7%20521%20opportunities-2980b9?style=flat-square" alt="172 packs">
+  <img src="https://img.shields.io/badge/Coverage-1900%E2%80%931950-2c3e50?style=flat-square" alt="1900–1950">
+  <img src="https://img.shields.io/badge/Guides-51-27ae60?style=flat-square" alt="51 guides">
+  <img src="https://img.shields.io/badge/Research-298%20packs%20%C2%B7%202%2C881%20facts%20%C2%B7%20919%20opportunities-2980b9?style=flat-square" alt="298 packs">
 </p>
 
 <p align="center">
@@ -37,6 +37,8 @@ Every citation and historical detail in these guides comes from real sources, so
 1910-1919/          Annual drafts for 1910–1919
 1920-1929/          Annual drafts for 1920–1929
 1930-1939/          Annual drafts for 1930–1939
+1940-1949/          Annual drafts for 1940–1949
+1950-1959/          Annual drafts for 1950–1959
 research/           Facts, opportunities and summaries filed by year and region, plus validation scripts
 CONTRIBUTING.md     How to contribute, submission rules, review process
 docs/               Data format spec, annual draft spec
@@ -54,8 +56,8 @@ LICENSE-CODE        License for the scripts
 ## 📊 Coverage (kept current)
 
 ```
-Drafts:   1900–1930, 31 guides, all reviewed
-Research: 1900–1930, 172 regional packs, 1,791 facts, 521 opportunities
+Drafts:   1900–1950, 51 guides (1900–1930 reviewed and approved; 1931–1950 conditionally approved pending source upgrades)
+Research: 1900–1950, 298 regional packs, 2,881 facts, 919 opportunities
 
 We want you to build this with us: a Guide covering the whole span of human existence, with every entry getting deeper and wider as we go. Read "Contributing" below to see how.
 ```
@@ -152,7 +154,7 @@ These are the constraints we hold ourselves to while writing — and the doubts 
 
 ## 📌 Known limitations
 
-- **Uneven year coverage.** 1900–1930 are written; 1931–2025 exist only as regional plans.
+- **Uneven year coverage.** 1900–1950 are written; 1951–2025 exist only as regional plans.
 - **Source tiers need raising.** Early research could reach only Wikipedia mirrors for some entries. Those have now been almost entirely normalized to Wikipedia itself, but a few entries still depend on AI-generated encyclopedias and revision sites; they are being replaced one by one.
 - **1926 has no wealth-jump stage.** That year's research pack contains no `wealth_jump` opportunity, so the draft offers only survival and first-capital routes. An explicit exemption is registered in `research/stage_exemptions.json`; it will be lifted once the research is filled in.
 - **Uneven regional depth.** Each year has one main stage carrying a full storyline; secondary regions are markedly shorter, and opportunity cards give only one entry point and one risk.
